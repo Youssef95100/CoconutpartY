@@ -1,3 +1,6 @@
+#ifndef structure_h
+#define structure_h
+
 #include <stdio.h>
 #include <stdlib.h> 
 
@@ -19,3 +22,9 @@ typedef struct{
     int y;
     int pv;
 }Couronne;
+
+
+
+
+
+#endif
