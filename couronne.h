@@ -10,12 +10,12 @@
 int ini_couronne(Couronne couronne){
     
     
-    printf("Saisir le nombre de points de vie de la couronne\n");
+    printf("Saisir le nombre de points de vie de la couronne : ");
     while(scanf("%d", &couronne.pv) != 1 || couronne.pv <= 0){
         printf("Erreur de saisie. Veuillez réessayer !\n");
         scanf("%d", &couronne.pv);
     } 
-    printf("La couronne a %d points de vie\n", couronne.pv);
+    printf("\nLa couronne a %d points de vie\n", couronne.pv);
     
     return couronne.pv;
 }
