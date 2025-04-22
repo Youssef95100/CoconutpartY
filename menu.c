@@ -3,7 +3,7 @@
 int menu(){
     int choix = 0;
     Couronne couronne;
-    int vie_couronne = 0;  
+    int vie_couronne = 0;
     printf("\nBienvenue dans CoconutpartY !\n\n");
     printf("1. Jouer\n");
     printf("2. Reprendre une ancienne partie\n");

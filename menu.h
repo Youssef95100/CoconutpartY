@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "structure.h"
 #include "couronne.h"
+#include "sauvegarde.h"
 
 int menu();
 

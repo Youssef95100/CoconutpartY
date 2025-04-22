@@ -6,6 +6,6 @@
 #include "structure.h"
 
 
-void sauvegarderPartie(Couronne couronne);
+void sauvegarderPartie(Couronne couronne , Crabe *crabe, Singe singe);
 
 #endif
