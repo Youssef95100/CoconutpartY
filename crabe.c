@@ -18,7 +18,8 @@ int pvCrabe(Crabe *crabe){
 
 
 int baissePvCrabe(Crabe *crabe, Singe singe){
-    if ((crabe->x - singe.x <= singe.rayon || crabe->x - singe.x >= - singe.rayon) && (crabe->y - singe.y <= singe.rayon || crabe->y - singe.y >= -singe.rayon)){ // le big if il veut dire "si le crabe est dans le rayon du singe"
+    if ((crabe->x - singe.x <= singe.rayon || crabe->x - singe.x >= - singe.rayon) 
+         && (crabe->y - singe.y <= singe.rayon || crabe->y - singe.y >= -singe.rayon)){ // le big if il veut dire "si le crabe est dans le rayon du singe"
 
 
         printf("Le singe attaque le crabe ! Il lui a fait %d dégats !\n", singe.degat);
