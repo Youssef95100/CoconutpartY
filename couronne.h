@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include "structure.h"
-
+#include "couronne.c"
 
 int ini_couronne(Couronne couronne);
 int pv_couronne(Couronne couronne,Crabe crabe );

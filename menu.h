@@ -7,6 +7,7 @@
 #include "structure.h"
 #include "couronne.h"
 #include "sauvegarde.h"
+#include "menu.c"
 
 int menu();
 

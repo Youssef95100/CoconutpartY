@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "couronne.h"
 
 int menu(){
     int choix = 0;
