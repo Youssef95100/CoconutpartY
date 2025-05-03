@@ -13,16 +13,20 @@ int main(int argc, char** argv)
 {
     
     bool joue = true;
-
     Couronne couronne;
-    
     int choix = menu();
+
+    printf("%d;%d",HAUTEUR, LARGEUR);
+   //terrain
+    int tab[HAUTEUR][LARGEUR];
+    initialisation(&tab);
+    chemin(&tab);
 
     while ( joue )
     {
 
         system("clear"); // Efface la console
-        afficher();
+        afficher(tab);
         sleep(1); //pause de 1 sec
     }
    
