@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <stdbool.h>
 
 
 
@@ -109,27 +110,33 @@ void afficher(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
 
 void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], EmplacementsSinges* emp )
 {
+    
     (*emp).nb_positions = 0;
     char lettre = 'a';
 
     for(int i=1; i < HAUTEUR - 1; i++)
     {
         for(int j=1; j < LARGEUR - 1; j++)
-        {
-            if(tab[i][j] == 32)//si la case est vide
-            {
-                if(tab[i-1][j] == '.' || tab[i+1][j] == '.' || tab[i][j+1] == '.' || tab[i][j-1] == '.')
-                {
-                    if((*emp).nb_positions < MAX_POSITIONS)
-                    {
-                        tab[i][j] = lettre;
-                        (*emp).positions[(*emp).nb_positions].id = lettre;
-                        (*emp).positions[(*emp).nb_positions].x = i;
-                        (*emp).positions[(*emp).nb_positions].y = j;
-                        (*emp).positions[(*emp).nb_positions].disponible = 1;
-                        (*emp).nb_positions++;
-                        lettre++;
+        {   
 
+            bool placer =(rand() % 4 == 0); //pour que l'apparition des singes soit aléatoire
+            if(placer)
+            {
+                if(tab[i][j] == 32)//si la case est vide
+                {
+                    if(tab[i-1][j] == '.' || tab[i+1][j] == '.' || tab[i][j+1] == '.' || tab[i][j-1] == '.')
+                    {
+                        if((*emp).nb_positions < MAX_POSITIONS)
+                        {
+                            tab[i][j] = lettre;
+                            (*emp).positions[(*emp).nb_positions].id = lettre;
+                            (*emp).positions[(*emp).nb_positions].x = i;
+                            (*emp).positions[(*emp).nb_positions].y = j;
+                            (*emp).positions[(*emp).nb_positions].disponible = 1;
+                            (*emp).nb_positions++;
+                            lettre++;
+
+                        }
                     }
                 }
             }
