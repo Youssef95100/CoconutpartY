@@ -20,20 +20,46 @@ int main(int argc, char** argv)
     int HAUTEUR = (rand() % (21 - 16 + 1)) + 16; // Hauteur entre 16 et 21
 
     bool joue = true;
+    char action;
     Couronne couronne;
-    //int choix = menu();
+    //&int choix = menu();
 
    //terrain
    int tab[HAUTEUR][LARGEUR];
+   EmplacementsSinges emp;
+   emp.nb_positions = 0;
     initialisation(HAUTEUR, LARGEUR, tab);
     chemin(HAUTEUR, LARGEUR, tab);
+    generer_emplacement(HAUTEUR, LARGEUR, tab, &emp);
 
     while ( joue )
     {
 
         system("clear"); // Efface la console
         afficher(HAUTEUR, LARGEUR, tab);
+
+
+        printf("\n--- Emplacements disponibles pour les singes ---\n");
+        for (int i = 0; i < emp.nb_positions; i++) {
+            if (emp.positions[i].disponible) {
+                printf("%c ", emp.positions[i].id);
+            }
+        }
+
+        printf("\n Appuyez sur 's' pour placer un singe, 'q' pour quitter : ");
+        scanf(" %c", &action);
+        //menu_singe(&emp);
+
+        if(action == 's')
+        {
+            placer_singe(&emp, HAUTEUR, LARGEUR, tab);
+        }else if (action == 'q')
+        {
+            joue = false;
+        }
+
         sleep(1); //pause de 1 sec
     }
-   
+
+   return 0;
 }

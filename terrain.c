@@ -1,7 +1,11 @@
 #include "terrain.h"
+#include "structure.h"
+#include <stdlib.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+
+
 
 
 void initialisation(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
@@ -35,7 +39,7 @@ void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
     srand(time(NULL)); // Initialiser le générateur de nombres aléatoires
 
     //Point de départ
-    int pdp_valeur = ( rand() % (HAUTEUR -1) ) ;
+    int pdp_valeur = (( rand() % (HAUTEUR -2)) + 1 ) ;
     tab[pdp_valeur][LARGEUR -2] = 35;
 
     //Point d'arrivé théorique
@@ -101,4 +105,82 @@ void afficher(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
         printf("\n");
     }
 
+}
+
+void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], EmplacementsSinges* emp )
+{
+    (*emp).nb_positions = 0;
+    char lettre = 'a';
+
+    for(int i=1; i < HAUTEUR - 1; i++)
+    {
+        for(int j=1; j < LARGEUR - 1; j++)
+        {
+            if(tab[i][j] == 32)//si la case est vide
+            {
+                if(tab[i-1][j] == '.' || tab[i+1][j] == '.' || tab[i][j+1] == '.' || tab[i][j-1] == '.')
+                {
+                    if((*emp).nb_positions < MAX_POSITIONS)
+                    {
+                        tab[i][j] = lettre;
+                        (*emp).positions[(*emp).nb_positions].id = lettre;
+                        (*emp).positions[(*emp).nb_positions].x = i;
+                        (*emp).positions[(*emp).nb_positions].y = j;
+                        (*emp).positions[(*emp).nb_positions].disponible = 1;
+                        (*emp).nb_positions++;
+                        lettre++;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+void menu_singe(EmplacementsSinges* emp)
+{
+    printf("\n MENU DE POSITIONNEMENT DES SINGES \n");
+    for(int i = 0; i < (*emp).nb_positions; i++)
+    {
+        if((*emp).positions[i].disponible == 1)
+        {
+            printf("%c : case (%d, %d)\n", (*emp).positions[i].id, (*emp).positions[i].x, 
+            (*emp).positions[i].y);
+
+        }
+    }
+    printf("Choisir la lettre correspondant à l'emplacement voulu :");
+}
+
+
+void placer_singe(EmplacementsSinges* emp, int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
+{
+    char choix;
+    scanf(" %c", &choix);
+
+    for(int i = 0; i < (*emp).nb_positions; i++)
+    {
+        if((*emp).positions[i].id == choix && (*emp).positions[i].disponible == 1)
+        {
+            int x = (*emp).positions[i].x;
+            int y = (*emp).positions[i].y;
+
+            if(x >= 0 && x < HAUTEUR && y >= 0 && y < LARGEUR)
+            {
+            tab[x][y] = 64;
+            (*emp).positions[i].disponible = 0;//on rend indisponible la case
+            printf("Singe placé en (%d, %d)\n", x, y);
+            }
+            
+            else
+            {
+                printf("Erreur, position hors limite\n");
+            }
+
+            return; //pour finir la boucle
+        }
+    }
+
+    printf("Choix invalide ou emplacement déjà utilisé\n");
 }
