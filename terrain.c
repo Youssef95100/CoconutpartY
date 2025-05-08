@@ -35,13 +35,19 @@ void initialisation(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
     }
 }
 
-void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
+void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin)
 {
     srand(time(NULL)); // Initialiser le générateur de nombres aléatoires
+    (*chemin).taille = 0;
 
     //Point de départ
     int pdp_valeur = (( rand() % (HAUTEUR -2)) + 1 ) ;
     tab[pdp_valeur][LARGEUR -2] = 35;
+
+    //Enregistrer la case de départ
+    (*chemin).cases[(*chemin).taille].x = pdp_valeur;
+    (*chemin).cases[(*chemin).taille].y = LARGEUR -2;
+    (*chemin).taille++;
 
     //Point d'arrivé théorique
     int pda_valeur = ( rand() % (HAUTEUR -1) ) +1 ;
@@ -78,6 +84,11 @@ void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
             && largeur_actuelle > 0) 
         {
             tab[hauteur_actuelle][largeur_actuelle] = '.';
+
+            //Enregistrer le chemin
+            (*chemin).cases[(*chemin).taille].x = hauteur_actuelle;
+            (*chemin).cases[(*chemin).taille].y = largeur_actuelle;
+            (*chemin).taille++;
         }
 
         // Vérifier que le chemin reste adjacent
@@ -85,12 +96,22 @@ void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
         tab[hauteur_actuelle][largeur_actuelle - 1] != 'X')
         {
             tab[hauteur_actuelle][largeur_actuelle - 1] = '.';
+
+            //Enregistrer le chemin
+            (*chemin).cases[(*chemin).taille].x = hauteur_actuelle;
+            (*chemin).cases[(*chemin).taille].y = largeur_actuelle - 1;
+            (*chemin).taille++;
         }
 
     }
 
         //Point d'arrivé réel
         tab[hauteur_actuelle][1] = 88;
+
+        //Enregistrer l'arrivée
+        (*chemin).cases[(*chemin).taille].x = hauteur_actuelle;
+        (*chemin).cases[(*chemin).taille].y = 1;
+        (*chemin).taille++;
 }
 
 void afficher(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
@@ -119,7 +140,7 @@ void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Em
         for(int j=1; j < LARGEUR - 1; j++)
         {   
 
-            bool placer =(rand() % 4 == 0); //pour que l'apparition des singes soit aléatoire
+            bool placer = (rand() % 4 == 0); //pour que l'apparition des singes soit aléatoire
             if(placer)
             {
                 if(tab[i][j] == 32)//si la case est vide

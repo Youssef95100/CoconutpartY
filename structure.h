@@ -6,14 +6,33 @@
 
 #include <stdio.h>
 #include <stdlib.h> 
+#include <stdbool.h>
 
-typedef struct{
+typedef struct
+{
     int x;
     int y;
     int pv;
+    int position; // L’indice de sa position dans le tableau de chemin
+    bool actif; //pour savoir si il est en vie ou arrivé
 }Crabe;
 
-typedef struct{
+//structure pour stocker le chemin
+
+typedef struct
+{
+    int x;
+    int y;
+}CaseChemin;
+
+typedef struct
+{
+    CaseChemin cases[100];
+    int taille;
+}Chemin;
+
+typedef struct
+{
     int x;
     int y;
     int degat;
