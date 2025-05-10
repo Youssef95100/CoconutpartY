@@ -23,8 +23,8 @@ void initialisation(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
     //setup des bordures en haut et en bas
     for(int i = 0; i < LARGEUR; i++)
     {
-        tab[0][i] = 151;
-        tab[HAUTEUR - 1][i] = 151;
+        tab[0][i] = 95;
+        tab[HAUTEUR - 1][i] = 95;
     }
 
     //setup des bordures a gauche et a droite
@@ -114,7 +114,7 @@ void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin)
         (*chemin).taille++;
 }
 
-void afficher(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
+void afficher(int HAUTEUR, int LARGEUR, char affichage[HAUTEUR][LARGEUR])//int tab[HAUTEUR][LARGEUR])
 {    
 
     // Affichage du tableau
@@ -122,7 +122,7 @@ void afficher(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
     {
         for (int j = 0; j < LARGEUR; j++) 
         {
-            printf("%c ", tab[i][j]);
+            printf("%c ", affichage[i][j]);//tab[i][j]);
         }
         printf("\n");
     }
@@ -212,3 +212,4 @@ void placer_singe(EmplacementsSinges* emp, int HAUTEUR, int LARGEUR, int tab[HAU
 
     printf("Choix invalide ou emplacement déjà utilisé\n");
 }
+

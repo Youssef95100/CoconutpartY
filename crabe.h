@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "structure.h"
 
+#define MAX_CRABES 5
+
 
 
 int pvCrabe(Crabe *crabe);

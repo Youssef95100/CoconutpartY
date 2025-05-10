@@ -5,7 +5,7 @@
 
 void initialisation(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR]);
 void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin);
-void afficher(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR]);
+void afficher(int HAUTEUR, int LARGEUR, char affichage[HAUTEUR][LARGEUR]);//int tab[HAUTEUR][LARGEUR]);
 void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], EmplacementsSinges* emp );
 void menu_singe(EmplacementsSinges* emp);
 void placer_singe(EmplacementsSinges* emp, int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR]);
