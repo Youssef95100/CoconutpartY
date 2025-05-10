@@ -35,7 +35,9 @@ void initialiserCrabe(Crabe* crabe)
     (*crabe).actif = true;
 }
 
-void deplacerCrabe(Crabe* crabe, Chemin* chemin, int hauteur, int largeur, int tab[hauteur][largeur])
+
+
+void deplacerCrabe(Crabe* crabe, Chemin* chemin)
 {
     if ((*crabe).actif == false)
         return;
@@ -47,32 +49,12 @@ void deplacerCrabe(Crabe* crabe, Chemin* chemin, int hauteur, int largeur, int t
         return;
     }
 
-    // Effacer l'ancienne position uniquement si ce n'était pas le départ ni la couronne
-    int ancienne_x = (*chemin).cases[(*crabe).position].x;
-    int ancienne_y = (*chemin).cases[(*crabe).position].y;
-
-    if (tab[ancienne_x][ancienne_y] == 'C') 
-    {
-        // On ne remet '.' que si ce n'était pas le départ ou la couronne
-        if (tab[ancienne_x][ancienne_y] != '#' && tab[ancienne_x][ancienne_y] != 'X') 
-        {
-            tab[ancienne_x][ancienne_y] = '.';
-        }
-    }
-
-    // Avancer le crabe
+    // Avancer le crabe d'une case
     (*crabe).position++;
 
-    // Nouvelle position
-    int nouvelle_x = (*chemin).cases[(*crabe).position].x;
-    int nouvelle_y = (*chemin).cases[(*crabe).position].y;
-
-    // Si c'est la couronne, on ne remplace pas 'X', on arrête le crabe
-    if (tab[nouvelle_x][nouvelle_y] == 'X') {
+    // S’il arrive sur la couronne, on arrête aussi
+    if ((*crabe).position >= (*chemin).taille - 1)
+    {
         (*crabe).actif = false;
-        return;
     }
-
-    // Sinon, afficher le crabe
-    tab[nouvelle_x][nouvelle_y] = 'C';
 }

@@ -114,7 +114,7 @@ void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin)
         (*chemin).taille++;
 }
 
-void afficher(int HAUTEUR, int LARGEUR, char affichage[HAUTEUR][LARGEUR])//int tab[HAUTEUR][LARGEUR])
+void afficher(int HAUTEUR, int LARGEUR, char affichage[HAUTEUR][LARGEUR])
 {    
 
     // Affichage du tableau
@@ -122,7 +122,7 @@ void afficher(int HAUTEUR, int LARGEUR, char affichage[HAUTEUR][LARGEUR])//int t
     {
         for (int j = 0; j < LARGEUR; j++) 
         {
-            printf("%c ", affichage[i][j]);//tab[i][j]);
+            printf("%c ", affichage[i][j]);
         }
         printf("\n");
     }
