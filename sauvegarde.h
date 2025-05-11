@@ -1,11 +1,11 @@
-#ifndef sauvegarde_h
-#define sauvegarde_h
+#ifndef SAUVEGARDE_H
+#define SAUVEGARDE_H
 
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "structure.h"
 
 
-void sauvegarderPartie(Couronne couronne , Crabe *crabe, Singe singe);
+void sauvegarder_partie(Couronne* couronne, Chemin* chemin, Crabe* crabes, int nb_crabes,
+    ListeSinges* liste_singes, EmplacementsSinges* emp, int num_vague);
 
 #endif

@@ -1,2 +1,0 @@
-PV de la couronne: 0
-Position de la couronne: (1, 0)

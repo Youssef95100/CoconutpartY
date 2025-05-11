@@ -1,0 +1,56 @@
+Couronne: x=32675 y=0 pv=5
+NbCrabes: 1
+Crabe 0: x=10 y=0 pv=3 position=2 actif=1
+NbSinges: 2
+Singe 0: x=1 y=3 degat=1 rayon=1 niveau=1
+Singe 1: x=1 y=8 degat=1 rayon=1 niveau=1
+NbPositions: 16
+Position 0: id=a x=1 y=3 disponible=0
+Position 1: id=b x=1 y=4 disponible=1
+Position 2: id=c x=1 y=7 disponible=1
+Position 3: id=d x=1 y=8 disponible=0
+Position 4: id=e x=1 y=10 disponible=1
+Position 5: id=f x=1 y=14 disponible=1
+Position 6: id=g x=1 y=21 disponible=1
+Position 7: id=h x=1 y=22 disponible=1
+Position 8: id=i x=1 y=23 disponible=1
+Position 9: id=j x=1 y=26 disponible=1
+Position 10: id=k x=1 y=29 disponible=1
+Position 11: id=l x=3 y=16 disponible=1
+Position 12: id=m x=3 y=17 disponible=1
+Position 13: id=n x=3 y=18 disponible=1
+Position 14: id=o x=3 y=19 disponible=1
+Position 15: id=p x=3 y=29 disponible=1
+CheminTaille: 31
+Case 0: x=3 y=30
+Case 1: x=2 y=30
+Case 2: x=2 y=29
+Case 3: x=2 y=28
+Case 4: x=2 y=27
+Case 5: x=2 y=26
+Case 6: x=2 y=25
+Case 7: x=2 y=24
+Case 8: x=2 y=23
+Case 9: x=2 y=22
+Case 10: x=2 y=21
+Case 11: x=2 y=20
+Case 12: x=2 y=19
+Case 13: x=2 y=18
+Case 14: x=2 y=17
+Case 15: x=2 y=16
+Case 16: x=2 y=15
+Case 17: x=2 y=14
+Case 18: x=2 y=13
+Case 19: x=2 y=12
+Case 20: x=2 y=11
+Case 21: x=2 y=10
+Case 22: x=2 y=9
+Case 23: x=2 y=8
+Case 24: x=2 y=7
+Case 25: x=2 y=6
+Case 26: x=2 y=5
+Case 27: x=2 y=4
+Case 28: x=2 y=3
+Case 29: x=2 y=2
+Case 30: x=2 y=1
+NumVague: 2

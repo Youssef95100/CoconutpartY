@@ -15,6 +15,7 @@ void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Em
 void menu_singe(EmplacementsSinges* emp);
 void placer_singe(EmplacementsSinges* emp, int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR]);
 void lire_action(char* action);
+void afficher_jeu(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin, Crabe crabe[], int nb_crabes, EmplacementsSinges* emp, int num_vague);
 
 
 
