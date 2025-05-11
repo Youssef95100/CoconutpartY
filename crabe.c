@@ -33,6 +33,7 @@ void initialiserCrabe(Crabe* crabe)
 {
     (*crabe).position = 0;
     (*crabe).actif = true;
+    (*crabe).pv = 3;
 }
 
 
@@ -56,5 +57,28 @@ void deplacerCrabe(Crabe* crabe, Chemin* chemin)
     if ((*crabe).position >= (*chemin).taille - 1)
     {
         (*crabe).actif = false;
+    }
+}
+void mettre_a_jour_liste_singes(ListeSinges * liste, EmplacementsSinges * emp) {
+    for (int i = 0; i < emp->nb_positions; i++) {
+        if (emp->positions[i].disponible == 0) {
+            // Vérifie si ce singe est déjà dans la liste
+            bool deja_present = false;
+            for (int j = 0; j < liste->nb_singes; j++) {
+                if (liste->singe[j].x == emp->positions[i].x && liste->singe[j].y == emp->positions[i].y) {
+                    deja_present = true;
+                    break;
+                }
+            }
+
+            if (!deja_present && liste->nb_singes < MAX_SINGES) {
+                liste->singe[liste->nb_singes].x = emp->positions[i].x;
+                liste->singe[liste->nb_singes].y = emp->positions[i].y;
+                liste->singe[liste->nb_singes].degat = 1;
+                liste->singe[liste->nb_singes].rayon = 1;
+                liste->singe[liste->nb_singes].niveau = 1;
+                liste->nb_singes++;
+            }
+        }
     }
 }
