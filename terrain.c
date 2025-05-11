@@ -120,7 +120,7 @@ void afficher(int HAUTEUR, int LARGEUR, char affichage[HAUTEUR][LARGEUR])
 
 }
 
-void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], EmplacementsSinges* emp )
+/*void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], EmplacementsSinges* emp )
 {
     
     (*emp).nb_positions = 0;
@@ -154,8 +154,30 @@ void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Em
             }
         }
     }
-}
+}*/
+void generer_emplacement(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], EmplacementsSinges* emp )
+{
+    (*emp).nb_positions = 0;
+    char lettre = 'a';
 
+    for(int i=1; i < HAUTEUR - 1; i++) {
+        for(int j=1; j < LARGEUR - 1; j++) {
+            bool placer = (rand() % 4 == 0); 
+            if (placer && tab[i][j] == 32) {
+                if (tab[i-1][j] == '.' || tab[i+1][j] == '.' || tab[i][j+1] == '.' || tab[i][j-1] == '.') {
+                    if ((*emp).nb_positions < MAX_POSITIONS) {
+                        (*emp).positions[(*emp).nb_positions].id = lettre;
+                        (*emp).positions[(*emp).nb_positions].x = i;
+                        (*emp).positions[(*emp).nb_positions].y = j;
+                        (*emp).positions[(*emp).nb_positions].disponible = 1;
+                        (*emp).nb_positions++;
+                        lettre++;
+                    }
+                }
+            }
+        }
+    }
+}
 
 void menu_singe(EmplacementsSinges* emp)
 {
@@ -187,7 +209,7 @@ void placer_singe(EmplacementsSinges* emp, int HAUTEUR, int LARGEUR, int tab[HAU
 
             if(x >= 0 && x < HAUTEUR && y >= 0 && y < LARGEUR)
             {
-            tab[x][y] = 64;
+            tab[x][y] = '@';
             (*emp).positions[i].disponible = 0;//on rend indisponible la case
             printf("Singe placé en (%d, %d)\n", x, y);
             }
@@ -203,6 +225,8 @@ void placer_singe(EmplacementsSinges* emp, int HAUTEUR, int LARGEUR, int tab[HAU
 
     printf("Choix invalide ou emplacement déjà utilisé\n");
 }
+
+
 
 void lire_action(char* action) {
     fd_set fds;
