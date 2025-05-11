@@ -226,4 +226,37 @@ void lire_action(char* action) {
 }
 
 
+// Fonction pour afficher le terrain, les crabes et les emplacements
+void afficher_jeu(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin, Crabe crabe[], int nb_crabes, EmplacementsSinges* emp, int num_vague)
+{
+    char affichage[HAUTEUR][LARGEUR];void afficher_jeu(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin, Crabe crabe[], int nb_crabes, EmplacementsSinges* emp, int num_vague);
 
+    // Copier le terrain
+    for(int i = 0; i < HAUTEUR; i++) {
+        for (int j = 0; j < LARGEUR; j++) {
+            affichage[i][j] = tab[i][j];
+        }
+    }
+
+    // Afficher les crabes
+    for (int i = 0; i < nb_crabes; i++) {
+        if (crabe[i].actif && crabe[i].position >= 0 && crabe[i].position < chemin->taille) {
+            int x = chemin->cases[crabe[i].position].x;
+            int y = chemin->cases[crabe[i].position].y;
+            affichage[x][y] = 'C';
+        }
+    }
+
+    // Affichage du terrain
+    afficher(HAUTEUR, LARGEUR, affichage);
+
+    // Informations
+    printf("\n--- Vague actuelle : %d ---\n", num_vague);
+    printf("\n--- Emplacements disponibles pour les singes ---\n");
+    for (int i = 0; i < emp->nb_positions; i++) {
+        if (emp->positions[i].disponible) {
+            printf("%c ", emp->positions[i].id);
+        }
+    }
+    printf("\n");
+}
