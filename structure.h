@@ -18,6 +18,11 @@ typedef struct
 }Crabe;
 
 //structure pour stocker le chemin
+typedef struct {
+    int num_crabes_dans_vague;
+    int crabes_deployes;
+    bool en_cours;
+} Vague;
 
 typedef struct
 {

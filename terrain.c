@@ -38,81 +38,72 @@ void initialisation(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR])
 void chemin(int HAUTEUR, int LARGEUR, int tab[HAUTEUR][LARGEUR], Chemin* chemin)
 {
     srand(time(NULL)); // Initialiser le générateur de nombres aléatoires
+
     (*chemin).taille = 0;
 
-    //Point de départ
-    int pdp_valeur = (( rand() % (HAUTEUR -2)) + 1 ) ;
-    tab[pdp_valeur][LARGEUR -2] = 35;
-
-    //Enregistrer la case de départ
-    (*chemin).cases[(*chemin).taille].x = pdp_valeur;
-    (*chemin).cases[(*chemin).taille].y = LARGEUR -2;
-    (*chemin).taille++;
-
-    //Point d'arrivé théorique
-    int pda_valeur = ( rand() % (HAUTEUR -1) ) +1 ;
-
+    // Point de départ
+    int pdp_valeur = rand() % (HAUTEUR - 2) + 1;
+    tab[pdp_valeur][LARGEUR - 2] = 35;
 
     int hauteur_actuelle = pdp_valeur;
-    int largeur_actuelle = LARGEUR -1;
+    int largeur_actuelle = LARGEUR - 2;
 
-    // Générer le chemin jusqu'à la colonne 0
-    while (largeur_actuelle > 0)
+    // Enregistrer la case de départ
+    (*chemin).cases[(*chemin).taille].x = hauteur_actuelle;
+    (*chemin).cases[(*chemin).taille].y = largeur_actuelle;
+    (*chemin).taille++;
+
+    // Point d'arrivée théorique
+    int pda_valeur = rand() % (HAUTEUR - 2) + 1;
+
+    while (largeur_actuelle > 1)
     {
-        // Déplacer vers la gauche
-        largeur_actuelle--;
+        int direction = rand() % 3; // 0 = haut, 1 = bas, 2 = gauche
 
-        // Déterminer si on monte, descend ou reste sur la même ligne
-        int direction = rand() % 3; // 0 = monter, 1 = descendre, 2 = avancer
+        int prochaine_hauteur = hauteur_actuelle;
+        int prochaine_largeur = largeur_actuelle;
 
-        if (direction == 0 && hauteur_actuelle > 1 && hauteur_actuelle > pda_valeur)
-        {
-            hauteur_actuelle--; // Monter
+        if (direction == 0 && hauteur_actuelle > 1 && hauteur_actuelle > pda_valeur) {
+            prochaine_hauteur--;//Monter
         }
-        else if(direction == 1 && hauteur_actuelle < HAUTEUR - 2 && hauteur_actuelle < pda_valeur)
-        {
-            hauteur_actuelle++; // Descendre
+        else if (direction == 1 && hauteur_actuelle < HAUTEUR - 2 && hauteur_actuelle < pda_valeur) {
+            prochaine_hauteur++;//Descendre
         }
-        else if(direction == 2 && largeur_actuelle > 1)
-        {
-            largeur_actuelle--; // Avancer
+        else if (direction == 2) {
+            prochaine_largeur--;//Avancer
         }
 
-        // Marquer le chemin avec '.'
-        if (tab[hauteur_actuelle][largeur_actuelle] != 'X'
-            && tab[hauteur_actuelle][largeur_actuelle] != '#'
-            && largeur_actuelle > 0) 
-        {
-            tab[hauteur_actuelle][largeur_actuelle] = '.';
+        // Ne pas ajouter si même position que précédente
+        if (prochaine_hauteur != hauteur_actuelle || prochaine_largeur != largeur_actuelle) {
+            if (tab[prochaine_hauteur][prochaine_largeur] != 'X' &&
+                tab[prochaine_hauteur][prochaine_largeur] != '#') {
 
-            //Enregistrer le chemin
-            (*chemin).cases[(*chemin).taille].x = hauteur_actuelle;
-            (*chemin).cases[(*chemin).taille].y = largeur_actuelle;
-            (*chemin).taille++;
+                tab[prochaine_hauteur][prochaine_largeur] = '.';
+                (*chemin).cases[(*chemin).taille].x = prochaine_hauteur;
+                (*chemin).cases[(*chemin).taille].y = prochaine_largeur;
+                (*chemin).taille++;
+
+                hauteur_actuelle = prochaine_hauteur;
+                largeur_actuelle = prochaine_largeur;
+            }
         }
-
-        // Vérifier que le chemin reste adjacent
-        if (largeur_actuelle > 1 && tab[hauteur_actuelle][largeur_actuelle - 1] != '.' &&
-        tab[hauteur_actuelle][largeur_actuelle - 1] != 'X')
-        {
-            tab[hauteur_actuelle][largeur_actuelle - 1] = '.';
-
-            //Enregistrer le chemin
-            (*chemin).cases[(*chemin).taille].x = hauteur_actuelle;
-            (*chemin).cases[(*chemin).taille].y = largeur_actuelle - 1;
-            (*chemin).taille++;
-        }
-
     }
 
-        //Point d'arrivé réel
-        tab[hauteur_actuelle][1] = 88;
+    // Point d'arrivée réel
+    tab[hauteur_actuelle][1] = 88;
 
-        //Enregistrer l'arrivée
+
+    // Enregistrer l'arrivée uniquement si elle diffère de la dernière
+    if ((*chemin).cases[(*chemin).taille - 1].x != hauteur_actuelle ||
+        (*chemin).cases[(*chemin).taille - 1].y != 1) {
         (*chemin).cases[(*chemin).taille].x = hauteur_actuelle;
         (*chemin).cases[(*chemin).taille].y = 1;
         (*chemin).taille++;
+    }
 }
+
+
+
 
 void afficher(int HAUTEUR, int LARGEUR, char affichage[HAUTEUR][LARGEUR])
 {    
@@ -212,4 +203,27 @@ void placer_singe(EmplacementsSinges* emp, int HAUTEUR, int LARGEUR, int tab[HAU
 
     printf("Choix invalide ou emplacement déjà utilisé\n");
 }
+
+void lire_action(char* action) {
+    fd_set fds;
+    struct timeval timeout;
+
+    // Réinitialiser les descripteurs de fichiers
+    FD_ZERO(&fds);
+    FD_SET(STDIN_FILENO, &fds);
+
+    timeout.tv_sec = TIMEOUT; // Timeout de 1 seconde
+    timeout.tv_usec = 0;
+
+    // Vérifie si une entrée est disponible
+    int ret = select(STDIN_FILENO + 1, &fds, NULL, NULL, &timeout);
+
+    if (ret > 0) { // Il y a une entrée disponible
+        *action = getchar(); // Lire l'entrée de l'utilisateur
+    } else {
+        *action = '\0'; // Pas d'entrée, continue sans rien
+    }
+}
+
+
 
