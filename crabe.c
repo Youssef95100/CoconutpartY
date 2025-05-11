@@ -28,3 +28,33 @@ int baissePvCrabe(Crabe *crabe, Singe singe){
     }
     return crabe->pv;
 }
+
+void initialiserCrabe(Crabe* crabe)
+{
+    (*crabe).position = 0;
+    (*crabe).actif = true;
+}
+
+
+
+void deplacerCrabe(Crabe* crabe, Chemin* chemin)
+{
+    if ((*crabe).actif == false)
+        return;
+
+    // Ne pas dépasser la fin du chemin
+    if ((*crabe).position >= (*chemin).taille - 1) 
+    {
+        (*crabe).actif = false;
+        return;
+    }
+
+    // Avancer le crabe d'une case
+    (*crabe).position++;
+
+    // S’il arrive sur la couronne, on arrête aussi
+    if ((*crabe).position >= (*chemin).taille - 1)
+    {
+        (*crabe).actif = false;
+    }
+}
